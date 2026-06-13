@@ -8,7 +8,7 @@ import { medicalConditions, foodItems, fruits, vegetables } from '@/data/quizDat
 import VisitorCounter from '@/components/VisitorCounter';
 
 const initialState: AssessmentData = {
-  age: 65,
+  age: 50,
   gender: 'male',
   diet: 'vegetarian',
   foodIntake: {},
@@ -217,14 +217,14 @@ function Step1Demographics({ data, updateData }: any) {
         </label>
         <input
           type="range"
-          min="60"
+          min="50"
           max="100"
           value={data.age}
           onChange={e => updateData({ age: parseInt(e.target.value) })}
-          className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+          className="w-full h-3 bg-gradient-to-r from-primary-200 to-purple-200 rounded-lg appearance-none cursor-pointer accent-primary-600"
         />
         <div className="flex justify-between text-sm text-slate-500 mt-2">
-          <span>60</span>
+          <span>50</span>
           <span>100+</span>
         </div>
       </div>
