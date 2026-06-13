@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "ES2020",
-    "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,8 +12,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
     "sourceMap": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
@@ -21,13 +19,11 @@
       "@/*": ["./src/*"]
     },
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "incremental": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "exclude": ["node_modules"]
 }
