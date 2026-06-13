@@ -102,18 +102,18 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 text-slate-800 p-4 md:p-8">
+    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 text-slate-800 p-4 md:p-8">
       <header className="w-full max-w-4xl mx-auto text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-emerald-700 mb-2">
-          वरिष्ठ नागरिक फिटनेस जांच
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+          FitnessScore
         </h1>
         <p className="text-lg text-slate-600">
-          आइए जानते हैं कि आप कितने स्वस्थ हैं
+          आपके स्वास्थ्य का आकलन करें | Check Your Fitness
         </p>
       </header>
 
       {!showResults ? (
-        <div className="w-full max-w-4xl mx-auto bg-white shadow-xl rounded-3xl p-6 md:p-10 border border-slate-100">
+        <div className="w-full max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 md:p-10 border border-blue-100">
           {/* Progress Indicator */}
           <div className="mb-8 flex items-center justify-between">
             {[1, 2, 3, 4, 5].map(s => (
@@ -121,9 +121,9 @@ export default function Home() {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
                     s === step
-                      ? 'bg-emerald-600 text-white scale-110'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white scale-110 shadow-lg'
                       : s < step
-                      ? 'bg-emerald-200 text-emerald-700'
+                      ? 'bg-success-200 text-success-700'
                       : 'bg-slate-200 text-slate-600'
                   }`}
                 >
@@ -131,8 +131,8 @@ export default function Home() {
                 </div>
                 {s < 5 && (
                   <div
-                    className={`h-1 w-12 md:w-20 ${
-                      s < step ? 'bg-emerald-200' : 'bg-slate-200'
+                    className={`h-1 w-12 md:w-20 transition-all ${
+                      s < step ? 'bg-success-300' : 'bg-slate-200'
                     }`}
                   />
                 )}
@@ -177,14 +177,14 @@ export default function Home() {
             {step < 5 ? (
               <button
                 onClick={() => setStep(step + 1)}
-                className="ml-auto px-6 py-3 text-lg font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all shadow-lg"
+                className="ml-auto px-6 py-3 text-lg font-semibold bg-gradient-to-r from-primary-500 to-purple-500 hover:from-primary-600 hover:to-purple-600 text-white rounded-xl transition-all shadow-lg"
               >
                 आगे →
               </button>
             ) : (
               <button
                 onClick={handleSubmit}
-                className="ml-auto px-8 py-3 text-xl font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all shadow-lg transform hover:scale-105"
+                className="ml-auto px-8 py-3 text-xl font-bold bg-gradient-to-r from-success-500 to-primary-500 hover:from-success-600 hover:to-primary-600 text-white rounded-xl transition-all shadow-lg transform hover:scale-105"
               >
                 परिणाम देखें 🎯
               </button>
@@ -315,25 +315,26 @@ function Step1Demographics({ data, updateData }: any) {
       {data.medicalConditions.length > 0 && (
         <div>
           <label className="block text-xl font-semibold text-slate-700 mb-3">
-            दवाई लेने में नियमितता
+            🏥 दवाई लेने में नियमितता
           </label>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { id: 'poor', label: '❌ खराब' },
-              { id: 'fair', label: '⚠️ औसत' },
-              { id: 'good', label: '✓ अच्छी' },
-              { id: 'excellent', label: '⭐ बहुत अच्छी' },
+              { id: 'poor', label: '❌ खराब', desc: 'कभी-कभी भूल जाता हूँ' },
+              { id: 'fair', label: '⚠️ औसत', desc: 'कुछ बार भूल जाता हूँ' },
+              { id: 'good', label: '✓ अच्छी', desc: 'लगभग हमेशा लेता हूँ' },
+              { id: 'excellent', label: '⭐ शानदार', desc: 'हर दिन समय पर लेता हूँ' },
             ].map(opt => (
               <button
                 key={opt.id}
                 onClick={() => updateData({ medicationAdherence: opt.id })}
-                className={`p-3 text-base font-semibold rounded-lg border-2 transition-all ${
+                className={`p-4 text-base font-semibold rounded-xl border-2 transition-all ${
                   data.medicationAdherence === opt.id
-                    ? 'border-emerald-600 bg-emerald-50'
-                    : 'border-slate-200'
+                    ? 'border-primary-600 bg-gradient-to-br from-primary-50 to-purple-50 shadow-md'
+                    : 'border-slate-200 hover:border-primary-300'
                 }`}
               >
-                {opt.label}
+                <div className="font-bold text-lg">{opt.label}</div>
+                <div className="text-xs text-slate-600 mt-1">{opt.desc}</div>
               </button>
             ))}
           </div>
@@ -349,61 +350,76 @@ function Step2Nutrition({ data, updateData }: any) {
       <h2 className="text-3xl font-bold text-slate-700 mb-6">🍽️ पोषण और जलयोजन</h2>
 
       {/* Water Intake */}
-      <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl p-6">
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          दिन में कितना पानी पीते हैं? {data.waterIntake} गिलास
+          💧 दिन में कितना पानी पीते हैं? {data.waterIntake} गिलास
         </label>
-        <div className="flex justify-between items-center gap-3">
+        <div className="flex justify-between items-center gap-3 mb-4">
           <button
             onClick={() => updateData({ waterIntake: Math.max(0, data.waterIntake - 1) })}
-            className="w-12 h-12 rounded-full bg-white border-2 border-slate-300 text-2xl font-bold hover:bg-slate-100 transition-all"
+            className="w-12 h-12 rounded-full bg-white border-2 border-blue-300 text-2xl font-bold hover:bg-blue-50 transition-all shadow-md"
           >
             −
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap justify-center flex-1">
             {Array.from({ length: 10 }).map((_, i) => (
-              <div
-                key={i}
-                className={`w-8 h-12 rounded-lg transition-all ${
-                  i < data.waterIntake
-                    ? 'bg-blue-500'
-                    : 'bg-slate-200'
-                }`}
-              />
+              <div key={i} className="relative">
+                {/* Glass outline */}
+                <svg width="28" height="40" viewBox="0 0 28 40" className="relative">
+                  <path
+                    d="M6 2H22V8H24V38C24 39.1 23.1 40 22 40H6C4.9 40 4 39.1 4 38V8H6V2Z"
+                    fill="none"
+                    stroke={i < data.waterIntake ? '#0ea5e9' : '#cbd5e1'}
+                    strokeWidth="1.5"
+                  />
+                  {/* Water fill */}
+                  {i < data.waterIntake && (
+                    <rect
+                      x="6"
+                      y={28 - (i < data.waterIntake ? 20 : 0)}
+                      width="16"
+                      height="12"
+                      fill="#0ea5e9"
+                      opacity="0.7"
+                    />
+                  )}
+                </svg>
+              </div>
             ))}
           </div>
           <button
             onClick={() => updateData({ waterIntake: Math.min(15, data.waterIntake + 1) })}
-            className="w-12 h-12 rounded-full bg-white border-2 border-slate-300 text-2xl font-bold hover:bg-slate-100 transition-all"
+            className="w-12 h-12 rounded-full bg-white border-2 border-blue-300 text-2xl font-bold hover:bg-blue-50 transition-all shadow-md"
           >
             +
           </button>
         </div>
-        <p className="text-sm text-slate-600 mt-2">लक्ष्य: 8-10 गिलास (2-2.5 लीटर)</p>
+        <p className="text-sm text-slate-600 text-center">लक्ष्य: 8-10 गिलास (2-2.5 लीटर)</p>
       </div>
 
       {/* Food Items */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-3">भोजन की मात्रा (दिन में कितनी बार)</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-2">🍽️ भोजन (कुल दिनभर में कितनी बार)</h3>
+        <p className="text-sm text-slate-600 mb-3">पूरे दिन में कुल कितनी बार खाते हैं?</p>
         <div className="space-y-4">
           {foodItems.map(food => (
-            <div key={food.id} className="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div key={food.id} className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-yellow-50 p-4 rounded-xl border-2 border-orange-200">
               <span className="text-lg font-semibold text-slate-700">{food.name}</span>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => updateData({
                     foodIntake: { ...data.foodIntake, [food.id]: Math.max(0, (data.foodIntake[food.id] || 0) - 1) }
                   })}
-                  className="w-10 h-10 rounded-full bg-white border-2 border-slate-300 font-bold hover:bg-slate-100"
+                  className="w-10 h-10 rounded-full bg-white border-2 border-orange-300 font-bold hover:bg-orange-100 transition-all"
                 >
                   −
                 </button>
-                <span className="w-12 text-center font-bold text-lg">{data.foodIntake[food.id] || 0}</span>
+                <span className="w-12 text-center font-bold text-lg text-slate-800">{data.foodIntake[food.id] || 0}</span>
                 <button
                   onClick={() => updateData({
                     foodIntake: { ...data.foodIntake, [food.id]: (data.foodIntake[food.id] || 0) + 1 }
                   })}
-                  className="w-10 h-10 rounded-full bg-white border-2 border-slate-300 font-bold hover:bg-slate-100"
+                  className="w-10 h-10 rounded-full bg-white border-2 border-orange-300 font-bold hover:bg-orange-100 transition-all"
                 >
                   +
                 </button>
@@ -415,26 +431,26 @@ function Step2Nutrition({ data, updateData }: any) {
 
       {/* Fruits */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-3">🍎 फल (दिन में कितनी बार)</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-3">🍎 फल (कुल दिनभर में कितनी बार)</h3>
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {fruits.map(fruit => (
-            <div key={fruit.id} className="flex items-center justify-between bg-orange-50 p-3 rounded-lg border border-orange-200">
-              <span className="text-lg text-slate-700">{fruit.name}</span>
+            <div key={fruit.id} className="flex items-center justify-between bg-gradient-to-r from-pink-50 to-red-50 p-3 rounded-lg border-2 border-pink-200">
+              <span className="text-lg text-slate-700 font-medium">{fruit.name}</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => updateData({
                     fruitIntake: { ...data.fruitIntake, [fruit.id]: Math.max(0, (data.fruitIntake[fruit.id] || 0) - 1) }
                   })}
-                  className="w-8 h-8 rounded-full bg-white border border-slate-300 font-bold text-sm hover:bg-slate-100"
+                  className="w-8 h-8 rounded-full bg-white border-2 border-pink-300 font-bold text-sm hover:bg-pink-100 transition-all"
                 >
                   −
                 </button>
-                <span className="w-10 text-center font-bold">{data.fruitIntake[fruit.id] || 0}</span>
+                <span className="w-10 text-center font-bold text-slate-800">{data.fruitIntake[fruit.id] || 0}</span>
                 <button
                   onClick={() => updateData({
                     fruitIntake: { ...data.fruitIntake, [fruit.id]: (data.fruitIntake[fruit.id] || 0) + 1 }
                   })}
-                  className="w-8 h-8 rounded-full bg-white border border-slate-300 font-bold text-sm hover:bg-slate-100"
+                  className="w-8 h-8 rounded-full bg-white border-2 border-pink-300 font-bold text-sm hover:bg-pink-100 transition-all"
                 >
                   +
                 </button>
@@ -446,26 +462,26 @@ function Step2Nutrition({ data, updateData }: any) {
 
       {/* Vegetables */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-3">🥬 सब्जियां (दिन में कितनी बार)</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-3">🥬 सब्जियां (कुल दिनभर में कितनी बार)</h3>
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {vegetables.map(veg => (
-            <div key={veg.id} className="flex items-center justify-between bg-green-50 p-3 rounded-lg border border-green-200">
-              <span className="text-lg text-slate-700">{veg.name}</span>
+            <div key={veg.id} className="flex items-center justify-between bg-gradient-to-r from-emerald-50 to-green-50 p-3 rounded-lg border-2 border-emerald-200">
+              <span className="text-lg text-slate-700 font-medium">{veg.name}</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => updateData({
                     vegetableIntake: { ...data.vegetableIntake, [veg.id]: Math.max(0, (data.vegetableIntake[veg.id] || 0) - 1) }
                   })}
-                  className="w-8 h-8 rounded-full bg-white border border-slate-300 font-bold text-sm hover:bg-slate-100"
+                  className="w-8 h-8 rounded-full bg-white border-2 border-emerald-300 font-bold text-sm hover:bg-emerald-100 transition-all"
                 >
                   −
                 </button>
-                <span className="w-10 text-center font-bold">{data.vegetableIntake[veg.id] || 0}</span>
+                <span className="w-10 text-center font-bold text-slate-800">{data.vegetableIntake[veg.id] || 0}</span>
                 <button
                   onClick={() => updateData({
                     vegetableIntake: { ...data.vegetableIntake, [veg.id]: (data.vegetableIntake[veg.id] || 0) + 1 }
                   })}
-                  className="w-8 h-8 rounded-full bg-white border border-slate-300 font-bold text-sm hover:bg-slate-100"
+                  className="w-8 h-8 rounded-full bg-white border-2 border-emerald-300 font-bold text-sm hover:bg-emerald-100 transition-all"
                 >
                   +
                 </button>
@@ -543,7 +559,7 @@ function Step3Activity({ data, updateData }: any) {
 
       {/* Strength Training */}
       <div>
-        <label className="text-xl font-semibold text-slate-700 mb-3 block">💪 शक्ति प्रशिक्षण करते हैं?</label>
+        <label className="text-xl font-semibold text-slate-700 mb-3 block">🏋️ ताकत बढ़ाने का व्यायाम करते हैं?</label>
         <div className="grid grid-cols-2 gap-3 mb-3">
           {[
             { id: true, label: '✓ हाँ' },
@@ -581,7 +597,7 @@ function Step3Activity({ data, updateData }: any) {
 
       {/* Flexibility */}
       <div>
-        <label className="text-xl font-semibold text-slate-700 mb-3 block">🤸 लचीलेपन की गतिविधि</label>
+        <label className="text-xl font-semibold text-slate-700 mb-3 block">🧘 शरीर को मुलायम और लचीला बनाने का व्यायाम</label>
         <select
           value={data.flexibilityActivity}
           onChange={e => updateData({ flexibilityActivity: e.target.value })}
@@ -899,14 +915,14 @@ function ResultsScreen({ score, recommendations, visitorCount, onReset }: any) {
   const category = getScoreCategoryLabel(score.category);
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 md:p-10 border border-slate-100">
+    <div className="w-full max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 md:p-10 border-2 border-primary-200">
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-emerald-700 mb-4">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
           🎯 आपके परिणाम
         </h2>
 
-        {/* Score Circle */}
+        {/* Score Circle with vibrant gradient */}
         <div className="relative w-48 h-48 mx-auto mb-8">
           <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
             <circle
@@ -917,19 +933,26 @@ function ResultsScreen({ score, recommendations, visitorCount, onReset }: any) {
               stroke="#e5e7eb"
               strokeWidth="3"
             />
+            <defs>
+              <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0ea5e9" />
+                <stop offset="50%" stopColor="#a855f7" />
+                <stop offset="100%" stopColor="#ec4899" />
+              </linearGradient>
+            </defs>
             <circle
               cx="50"
               cy="50"
               r="45"
               fill="none"
-              stroke={category.color}
+              stroke="url(#scoreGradient)"
               strokeWidth="3"
               strokeDasharray={`${(score.total / 100) * 282.7} 282.7`}
               className="transition-all duration-500"
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-5xl font-bold text-slate-800">{score.total}</div>
+            <div className="text-5xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">{score.total}</div>
             <div className="text-sm text-slate-600">/100</div>
           </div>
         </div>
