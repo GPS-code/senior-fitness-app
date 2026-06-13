@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 text-lg font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 text-lg font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .input-range {
+    @apply w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full font-semibold text-sm;
+  }
+
+  .badge-success {
+    @apply badge bg-emerald-100 text-emerald-800;
+  }
+
+  .badge-warning {
+    @apply badge bg-amber-100 text-amber-800;
+  }
+
+  .badge-danger {
+    @apply badge bg-red-100 text-red-800;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
