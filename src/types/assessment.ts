@@ -74,23 +74,26 @@ export interface Recommendation {
 
 export interface MedicalCondition {
   id: string;
-  label: string;
+  labelHi: string;
+  labelEn: string;
 }
 
 export interface FoodItem {
   id: string;
-  name: string;
+  nameHi: string;
+  nameEn: string;
   category: 'Staples' | 'Proteins' | 'Extras';
   unit: string;
-  protein?: number; // g per serving
-  fiber?: number; // g per serving
-  calcium?: number; // mg per serving
-  iron?: number; // mg per serving
+  protein?: number;
+  fiber?: number;
+  calcium?: number;
+  iron?: number;
 }
 
 export interface FruitItem {
   id: string;
-  name: string;
+  nameHi: string;
+  nameEn: string;
   season: string;
   unit: string;
   fiber?: number;
@@ -99,7 +102,8 @@ export interface FruitItem {
 
 export interface VegetableItem {
   id: string;
-  name: string;
+  nameHi: string;
+  nameEn: string;
   season: string;
   unit: string;
   fiber?: number;

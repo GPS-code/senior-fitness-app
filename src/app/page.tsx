@@ -329,7 +329,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
                 }}
                 className="w-6 h-6 accent-emerald-600 cursor-pointer"
               />
-              <span className="ml-3 text-lg">{cond.label}</span>
+              <span className="ml-3 text-lg">{lang === 'hi' ? cond.labelHi : cond.labelEn}</span>
             </label>
           ))}
         </div>
@@ -463,7 +463,7 @@ function Step2Nutrition({ data, updateData, lang }: any) {
         <div className="space-y-4">
           {foodItems.map(food => (
             <div key={food.id} className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-yellow-50 p-4 rounded-xl border-2 border-orange-200">
-              <span className="text-lg font-semibold text-slate-700">{food.name}</span>
+              <span className="text-lg font-semibold text-slate-700">{lang === 'hi' ? food.nameHi : food.nameEn}</span>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => updateData({
@@ -494,7 +494,7 @@ function Step2Nutrition({ data, updateData, lang }: any) {
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {fruits.map(fruit => (
             <div key={fruit.id} className="flex items-center justify-between bg-gradient-to-r from-pink-50 to-red-50 p-3 rounded-lg border-2 border-pink-200">
-              <span className="text-lg text-slate-700 font-medium">{fruit.name}</span>
+              <span className="text-lg text-slate-700 font-medium">{lang === 'hi' ? fruit.nameHi : fruit.nameEn}</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => updateData({
@@ -525,7 +525,7 @@ function Step2Nutrition({ data, updateData, lang }: any) {
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {vegetables.map(veg => (
             <div key={veg.id} className="flex items-center justify-between bg-gradient-to-r from-emerald-50 to-green-50 p-3 rounded-lg border-2 border-emerald-200">
-              <span className="text-lg text-slate-700 font-medium">{veg.name}</span>
+              <span className="text-lg text-slate-700 font-medium">{lang === 'hi' ? veg.nameHi : veg.nameEn}</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => updateData({
