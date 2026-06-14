@@ -166,27 +166,27 @@ export default function Home() {
 
           {/* STEP 1: Demographics & Health */}
           {step === 1 && (
-            <Step1Demographics data={data} updateData={updateData} />
+            <Step1Demographics data={data} updateData={updateData} lang={lang} />
           )}
 
           {/* STEP 2: Nutrition */}
           {step === 2 && (
-            <Step2Nutrition data={data} updateData={updateData} />
+            <Step2Nutrition data={data} updateData={updateData} lang={lang} />
           )}
 
           {/* STEP 3: Physical Activity */}
           {step === 3 && (
-            <Step3Activity data={data} updateData={updateData} />
+            <Step3Activity data={data} updateData={updateData} lang={lang} />
           )}
 
           {/* STEP 4: Sleep & Lifestyle */}
           {step === 4 && (
-            <Step4SleepLifestyle data={data} updateData={updateData} />
+            <Step4SleepLifestyle data={data} updateData={updateData} lang={lang} />
           )}
 
           {/* STEP 5: Review */}
           {step === 5 && (
-            <Step5Review data={data} />
+            <Step5Review data={data} lang={lang} />
           )}
 
           {/* Navigation */}
@@ -229,7 +229,7 @@ export default function Home() {
 
 // ============== STEP COMPONENTS ==============
 
-function Step1Demographics({ data, updateData }: any) {
+function Step1Demographics({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-slate-700 mb-6">👤 व्यक्तिगत जानकारी</h2>
@@ -392,7 +392,7 @@ function Step1Demographics({ data, updateData }: any) {
   );
 }
 
-function Step2Nutrition({ data, updateData }: any) {
+function Step2Nutrition({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-slate-700 mb-6">🍽️ पोषण और जलयोजन</h2>
@@ -546,7 +546,7 @@ function Step2Nutrition({ data, updateData }: any) {
   );
 }
 
-function Step3Activity({ data, updateData }: any) {
+function Step3Activity({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-slate-700 mb-6">🏃 व्यायाम और गतिविधि</h2>
@@ -722,7 +722,7 @@ function Step3Activity({ data, updateData }: any) {
   );
 }
 
-function Step4SleepLifestyle({ data, updateData }: any) {
+function Step4SleepLifestyle({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-slate-700 mb-6">😴 नींद और जीवनशैली</h2>
@@ -918,7 +918,7 @@ function Step4SleepLifestyle({ data, updateData }: any) {
   );
 }
 
-function Step5Review({ data }: any) {
+function Step5Review({ data, lang }: any) {
   const nutrition = calculateNutritionData(data);
 
   return (
