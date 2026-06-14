@@ -196,21 +196,21 @@ export default function Home() {
               disabled={step === 1}
               className="px-6 py-3 text-lg font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {lang === 'hi' ? '← पीछे' : '← Back'}
+              ← पीछे
             </button>
             {step < 5 ? (
               <button
                 onClick={() => setStep(step + 1)}
                 className="ml-auto px-6 py-3 text-lg font-semibold bg-gradient-to-r from-primary-500 to-purple-500 hover:from-primary-600 hover:to-purple-600 text-white rounded-xl transition-all shadow-lg"
               >
-                {lang === 'hi' ? 'आगे →' : 'Next →'}
+                आगे →
               </button>
             ) : (
               <button
                 onClick={handleSubmit}
                 className="ml-auto px-8 py-3 text-xl font-bold bg-gradient-to-r from-success-500 to-primary-500 hover:from-success-600 hover:to-primary-600 text-white rounded-xl transition-all shadow-lg transform hover:scale-105"
               >
-                {lang === 'hi' ? 'परिणाम देखें 🎯' : 'See Results 🎯'}
+                परिणाम देखें 🎯
               </button>
             )}
           </div>
@@ -232,7 +232,7 @@ export default function Home() {
 function Step1Demographics({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-slate-700 mb-6">{lang === 'hi' ? '👤 व्यक्तिगत जानकारी' : '👤 Personal Information'}</h2>
+      <h2 className="text-3xl font-bold text-slate-700 mb-6">👤 व्यक्तिगत जानकारी</h2>
 
       {/* Age */}
       <div>
@@ -255,7 +255,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
 
       {/* Gender */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'लिंग' : 'Gender'}</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">लिंग</label>
         <div className="grid grid-cols-3 gap-3">
           {[
             { id: 'male', label: '🧑 पुरुष' },
@@ -279,7 +279,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
 
       {/* Diet */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'खान-पान की आदत' : 'Diet Type'}</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">खान-पान की आदत</label>
         <div className="grid grid-cols-2 gap-3">
           {[
             { id: 'vegetarian', label: '🥗 शाकाहारी' },
@@ -556,7 +556,7 @@ function Step2Nutrition({ data, updateData, lang }: any) {
 function Step3Activity({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-slate-700 mb-6">{lang === 'hi' ? '🏃 व्यायाम और गतिविधि' : '🏃 Physical Activity'}</h2>
+      <h2 className="text-3xl font-bold text-slate-700 mb-6">🏃 व्यायाम और गतिविधि</h2>
 
       {/* Walking */}
       <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
@@ -618,7 +618,7 @@ function Step3Activity({ data, updateData, lang }: any) {
 
       {/* Strength Training */}
       <div>
-        <label className="text-xl font-semibold text-slate-700 mb-3 block">{lang === 'hi' ? '🏋️ ताकत बढ़ाने का व्यायाम करते हैं?' : '🏋️ Do you do strength training?'}</label>
+        <label className="text-xl font-semibold text-slate-700 mb-3 block">🏋️ ताकत बढ़ाने का व्यायाम करते हैं?</label>
         <div className="grid grid-cols-2 gap-3 mb-3">
           {[
             { id: true, label: '✓ हाँ' },
@@ -656,7 +656,7 @@ function Step3Activity({ data, updateData, lang }: any) {
 
       {/* Flexibility */}
       <div>
-        <label className="text-xl font-semibold text-slate-700 mb-3 block">{lang === 'hi' ? '🧘 शरीर को मुलायम और लचीला बनाने का व्यायाम' : '🧘 Stretching & Flexibility'}</label>
+        <label className="text-xl font-semibold text-slate-700 mb-3 block">🧘 शरीर को मुलायम और लचीला बनाने का व्यायाम</label>
         <select
           value={data.flexibilityActivity}
           onChange={e => updateData({ flexibilityActivity: e.target.value })}
@@ -732,7 +732,7 @@ function Step3Activity({ data, updateData, lang }: any) {
 function Step4SleepLifestyle({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-slate-700 mb-6">{lang === 'hi' ? '😴 नींद और जीवनशैली' : '😴 Sleep & Lifestyle'}</h2>
+      <h2 className="text-3xl font-bold text-slate-700 mb-6">😴 नींद और जीवनशैली</h2>
 
       {/* Sleep Hours */}
       <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-6">
@@ -938,7 +938,7 @@ function Step5Review({ data, lang }: any) {
           <p className="text-2xl font-bold text-slate-800">{data.age} साल</p>
         </div>
         <div className="bg-pink-50 p-4 rounded-xl border-2 border-pink-200">
-          <p className="text-sm text-slate-600">{lang === 'hi' ? 'लिंग' : 'Gender'}</p>
+          <p className="text-sm text-slate-600">लिंग</p>
           <p className="text-2xl font-bold text-slate-800">
             {data.gender === 'male' ? 'पुरुष' : data.gender === 'female' ? 'महिला' : 'अन्य'}
           </p>
