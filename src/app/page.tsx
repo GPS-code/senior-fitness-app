@@ -395,12 +395,17 @@ function Step1Demographics({ data, updateData, lang }: any) {
 function Step2Nutrition({ data, updateData, lang }: any) {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-slate-700 mb-6">🍽️ पोषण और जलयोजन</h2>
+      <h2 className="text-3xl font-bold text-slate-700 mb-6">
+        {lang === 'hi' ? '🍽️ पोषण और जलयोजन' : '🍽️ Nutrition & Hydration'}
+      </h2>
 
       {/* Water Intake */}
       <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl p-6">
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          💧 दिन में कितना पानी पीते हैं? {data.waterIntake} गिलास
+          {lang === 'hi' 
+            ? `💧 दिन में कितना पानी पीते हैं? ${data.waterIntake} गिलास`
+            : `💧 How much water do you drink daily? ${data.waterIntake} glasses`
+          }
         </label>
         <div className="flex justify-between items-center gap-3 mb-4">
           <button
@@ -442,7 +447,9 @@ function Step2Nutrition({ data, updateData, lang }: any) {
             +
           </button>
         </div>
-        <p className="text-sm text-slate-600 text-center">लक्ष्य: 8-10 गिलास (2-2.5 लीटर)</p>
+        <p className="text-sm text-slate-600 text-center">
+          {lang === 'hi' ? 'लक्ष्य: 8-10 गिलास (2-2.5 लीटर)' : 'Target: 8-10 glasses (2-2.5 liters)'}
+        </p>
       </div>
 
       {/* Food Items */}
