@@ -1,7 +1,7 @@
 // For MVP: Using in-memory storage (will reset on server restart)
 // For production: Replace with database connection
 
-let visitorCount = 0;
+let visitorCount = 277; // Starting count
 const startDate = new Date();
 
 export async function GET() {

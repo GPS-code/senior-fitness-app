@@ -40,6 +40,7 @@ const initialState: AssessmentData = {
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [lang, setLang] = useState<'hi' | 'en'>('hi'); // NEW: Language toggle
   const [data, setData] = useState<AssessmentData>(initialState);
   const [fitnessScore, setFitnessScore] = useState<FitnessScore | null>(null);
   const [recommendations, setRecommendations] = useState<any[]>([]);
@@ -102,13 +103,36 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 text-slate-800 p-4 md:p-8">
+    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 text-slate-800 px-2 py-4 sm:px-4 md:p-8 overflow-x-hidden">
       <header className="w-full max-w-4xl mx-auto text-center mb-8">
+        {/* Language Toggle */}
+        <div className="flex justify-center gap-2 mb-4">
+          <button
+            onClick={() => setLang('hi')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              lang === 'hi'
+                ? 'bg-gradient-to-r from-primary-500 to-purple-500 text-white shadow-lg'
+                : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-primary-300'
+            }`}
+          >
+            हिन्दी
+          </button>
+          <button
+            onClick={() => setLang('en')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              lang === 'en'
+                ? 'bg-gradient-to-r from-primary-500 to-purple-500 text-white shadow-lg'
+                : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-primary-300'
+            }`}
+          >
+            English
+          </button>
+        </div>
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-          FitnessScore
+          {lang === 'hi' ? 'FitnessScore' : 'FitnessScore'}
         </h1>
         <p className="text-lg text-slate-600">
-          आपके स्वास्थ्य का आकलन करें | Check Your Fitness
+          {lang === 'hi' ? 'आपके स्वास्थ्य का आकलन करें | Check Your Fitness' : 'Assess Your Health & Fitness'}
         </p>
       </header>
 
@@ -315,14 +339,38 @@ function Step1Demographics({ data, updateData }: any) {
       {data.medicalConditions.length > 0 && (
         <div>
           <label className="block text-xl font-semibold text-slate-700 mb-3">
-            🏥 दवाई लेने में नियमितता
+            🏥 {lang === 'hi' ? 'दवाई लेने में नियमितता' : 'Medication Adherence'}
           </label>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { id: 'poor', label: '❌ खराब', desc: 'कभी-कभी भूल जाता हूँ' },
-              { id: 'fair', label: '⚠️ औसत', desc: 'कुछ बार भूल जाता हूँ' },
-              { id: 'good', label: '✓ अच्छी', desc: 'लगभग हमेशा लेता हूँ' },
-              { id: 'excellent', label: '⭐ शानदार', desc: 'हर दिन समय पर लेता हूँ' },
+              { 
+                id: 'poor', 
+                labelHi: '❌ खराब', 
+                descHi: data.gender === 'female' ? 'कभी-कभी भूल जाती हूँ' : 'कभी-कभी भूल जाता हूँ',
+                labelEn: '❌ Poor',
+                descEn: 'Sometimes forget'
+              },
+              { 
+                id: 'fair', 
+                labelHi: '⚠️ औसत', 
+                descHi: data.gender === 'female' ? 'कुछ बार भूल जाती हूँ' : 'कुछ बार भूल जाता हूँ',
+                labelEn: '⚠️ Fair',
+                descEn: 'Often forget'
+              },
+              { 
+                id: 'good', 
+                labelHi: '✓ अच्छी', 
+                descHi: data.gender === 'female' ? 'लगभग हमेशा लेती हूँ' : 'लगभग हमेशा लेता हूँ',
+                labelEn: '✓ Good',
+                descEn: 'Usually remember'
+              },
+              { 
+                id: 'excellent', 
+                labelHi: '⭐ शानदार', 
+                descHi: data.gender === 'female' ? 'हर दिन समय पर लेती हूँ' : 'हर दिन समय पर लेता हूँ',
+                labelEn: '⭐ Excellent',
+                descEn: 'Always on time'
+              },
             ].map(opt => (
               <button
                 key={opt.id}
@@ -333,8 +381,8 @@ function Step1Demographics({ data, updateData }: any) {
                     : 'border-slate-200 hover:border-primary-300'
                 }`}
               >
-                <div className="font-bold text-lg">{opt.label}</div>
-                <div className="text-xs text-slate-600 mt-1">{opt.desc}</div>
+                <div className="font-bold text-lg">{lang === 'hi' ? opt.labelHi : opt.labelEn}</div>
+                <div className="text-xs text-slate-600 mt-1">{lang === 'hi' ? opt.descHi : opt.descEn}</div>
               </button>
             ))}
           </div>
@@ -399,8 +447,12 @@ function Step2Nutrition({ data, updateData }: any) {
 
       {/* Food Items */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-2">🍽️ भोजन (कुल दिनभर में कितनी बार)</h3>
-        <p className="text-sm text-slate-600 mb-3">पूरे दिन में कुल कितनी बार खाते हैं?</p>
+        <h3 className="text-xl font-semibold text-slate-700 mb-2">🍽️ {lang === 'hi' ? 'भोजन (सप्ताह में कुल कितना)' : 'Food (Total Per Week)'}</h3>
+        <p className="text-sm text-slate-600 mb-3">
+          {lang === 'hi' 
+            ? 'पूरे हफ़्ते में कुल कितना खाते हैं? (उदा: 14 रोटी = हफ़्ते में 2 रोटी प्रतिदिन)' 
+            : 'Total amount per week? (e.g., 14 chapatis = 2 per day)'}
+        </p>
         <div className="space-y-4">
           {foodItems.map(food => (
             <div key={food.id} className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-yellow-50 p-4 rounded-xl border-2 border-orange-200">
@@ -431,7 +483,7 @@ function Step2Nutrition({ data, updateData }: any) {
 
       {/* Fruits */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-3">🍎 फल (कुल दिनभर में कितनी बार)</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-3">🍎 {lang === 'hi' ? 'फल (सप्ताह में कुल कितनी बार)' : 'Fruits (Times Per Week)'}</h3>
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {fruits.map(fruit => (
             <div key={fruit.id} className="flex items-center justify-between bg-gradient-to-r from-pink-50 to-red-50 p-3 rounded-lg border-2 border-pink-200">
@@ -462,7 +514,7 @@ function Step2Nutrition({ data, updateData }: any) {
 
       {/* Vegetables */}
       <div>
-        <h3 className="text-xl font-semibold text-slate-700 mb-3">🥬 सब्जियां (कुल दिनभर में कितनी बार)</h3>
+        <h3 className="text-xl font-semibold text-slate-700 mb-3">🥬 {lang === 'hi' ? 'सब्जियां (सप्ताह में कुल कितनी बार)' : 'Vegetables (Times Per Week)'}</h3>
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {vegetables.map(veg => (
             <div key={veg.id} className="flex items-center justify-between bg-gradient-to-r from-emerald-50 to-green-50 p-3 rounded-lg border-2 border-emerald-200">
