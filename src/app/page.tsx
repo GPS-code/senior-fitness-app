@@ -237,7 +237,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
       {/* Age */}
       <div>
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          आपकी उम्र: {data.age} साल
+          {lang === 'hi' ? `आपकी उम्र: ${data.age} साल` : `Your Age: ${data.age} years`}
         </label>
         <input
           type="range"
@@ -260,7 +260,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
           {[
             { id: 'male', label: '🧑 पुरुष' },
             { id: 'female', label: '👩 महिला' },
-            { id: 'prefer_not_to_say', label: '❓ कहना नहीं चाहता' },
+            { id: 'prefer_not_to_say', labelHi: '❓ कहना नहीं चाहता', labelEn: '❓ Prefer not to say' },
           ].map(opt => (
             <button
               key={opt.id}
@@ -282,10 +282,10 @@ function Step1Demographics({ data, updateData, lang }: any) {
         <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'खान-पान की आदत' : 'Diet Type'}</label>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { id: 'vegetarian', label: '🥗 शाकाहारी' },
-            { id: 'vegan', label: '🌱 वीगन' },
-            { id: 'eggetarian', label: '🥚 अंडा-शाकाहारी' },
-            { id: 'nonvegetarian', label: '🍗 मांसाहारी' },
+            { id: 'vegetarian', labelHi: '🥗 शाकाहारी', labelEn: '🥗 Vegetarian' },
+            { id: 'vegan', labelHi: '🌱 वीगन', labelEn: '🌱 Vegan' },
+            { id: 'eggetarian', labelHi: '🥚 अंडा-शाकाहारी', labelEn: '🥚 Eggetarian' },
+            { id: 'nonvegetarian', labelHi: '🍗 मांसाहारी', labelEn: '🍗 Non-Vegetarian' },
           ].map(opt => (
             <button
               key={opt.id}
@@ -296,7 +296,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
-              {opt.label}
+              {lang === 'hi' ? opt.labelHi : opt.labelEn}
             </button>
           ))}
         </div>
@@ -305,7 +305,7 @@ function Step1Demographics({ data, updateData, lang }: any) {
       {/* Medical Conditions */}
       <div>
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          स्वास्थ्य समस्याएं (कोई भी चुनें)
+          {lang === 'hi' ? 'स्वास्थ्य समस्याएं (कोई भी चुनें)' : 'Health Issues (Select any)'}
         </label>
         <div className="grid grid-cols-1 gap-2">
           {medicalConditions.map(cond => (
@@ -561,7 +561,7 @@ function Step3Activity({ data, updateData, lang }: any) {
       {/* Walking */}
       <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          रोज़ कितना समय तेज़ चलते हैं? {data.walkingMinutes} मिनट
+          {lang === 'hi' ? 'रोज़ कितना समय तेज़ चलते हैं?' : 'How much do you walk daily?'} {data.walkingMinutes} मिनट
         </label>
         <input
           type="range"
@@ -576,7 +576,7 @@ function Step3Activity({ data, updateData, lang }: any) {
           <span>120 मिनट</span>
         </div>
         <div className="mt-3">
-          <label className="text-lg font-semibold text-slate-700 mb-2 block">व्यायाम की तीव्रता</label>
+          <label className="text-lg font-semibold text-slate-700 mb-2 block">{lang === 'hi' ? 'व्यायाम की तीव्रता' : 'Exercise Intensity'}</label>
           <select
             value={data.walkingIntensity}
             onChange={e => updateData({ walkingIntensity: e.target.value })}
@@ -592,7 +592,7 @@ function Step3Activity({ data, updateData, lang }: any) {
       {/* Yoga */}
       <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-6">
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          योग करते हैं? {data.yogaMinutes} मिनट
+          {lang === 'hi' ? 'योग करते हैं?' : 'Do you practice yoga?'} {data.yogaMinutes} मिनट
         </label>
         <input
           type="range"
@@ -622,7 +622,7 @@ function Step3Activity({ data, updateData, lang }: any) {
         <div className="grid grid-cols-2 gap-3 mb-3">
           {[
             { id: true, label: '✓ हाँ' },
-            { id: false, label: '✗ नहीं' },
+            { id: false, labelHi: '✗ नहीं', labelEn: '✗ No' },
           ].map(opt => (
             <button
               key={String(opt.id)}
@@ -681,11 +681,11 @@ function Step3Activity({ data, updateData, lang }: any) {
 
       {/* Balance Training */}
       <div>
-        <label className="text-xl font-semibold text-slate-700 mb-3 block">⚖️ संतुलन प्रशिक्षण करते हैं?</label>
+        <label className="text-xl font-semibold text-slate-700 mb-3 block">{lang === 'hi' ? '⚖️ संतुलन प्रशिक्षण करते हैं?' : '⚖️ Do you do balance training?'}</label>
         <div className="grid grid-cols-2 gap-3 mb-3">
           {[
             { id: true, label: '✓ हाँ' },
-            { id: false, label: '✗ नहीं' },
+            { id: false, labelHi: '✗ नहीं', labelEn: '✗ No' },
           ].map(opt => (
             <button
               key={String(opt.id)}
@@ -737,7 +737,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
       {/* Sleep Hours */}
       <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-6">
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          रात को कितने घंटे सोते हैं? {data.sleepHours} घंटे
+          {lang === 'hi' ? 'रात को कितने घंटे सोते हैं?' : 'How many hours do you sleep?'} {data.sleepHours} घंटे
         </label>
         <input
           type="range"
@@ -747,12 +747,12 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
           onChange={e => updateData({ sleepHours: parseInt(e.target.value) })}
           className="w-full h-3 bg-slate-200 rounded-lg accent-indigo-600"
         />
-        <p className="text-sm text-slate-600 mt-2">लक्ष्य: 7-8 घंटे</p>
+        <p className="text-sm text-slate-600 mt-2">{lang === 'hi' ? 'लक्ष्य: 7-8 घंटे' : 'Target: 7-8 hours'}</p>
       </div>
 
       {/* Sleep Quality */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">नींद की गुणवत्ता</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'नींद की गुणवत्ता' : 'Sleep Quality'}</label>
         <div className="grid grid-cols-4 gap-3">
           {[
             { id: 'poor', emoji: '😞', label: 'खराब' },
@@ -778,10 +778,10 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
 
       {/* Sleep Disturbances */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">नींद में बाधा</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'नींद में बाधा' : 'Sleep Disturbances'}</label>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { id: 'none', label: 'कोई नहीं' },
+            { id: 'none', labelHi: 'कोई नहीं', labelEn: 'None' },
             { id: 'insomnia', label: 'अनिद्रा' },
             { id: 'apnea', label: 'स्लीप एपनिया' },
             { id: 'frequent_waking', label: 'बार-बार जागना' },
@@ -815,7 +815,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
       {/* Rest Days */}
       <div>
         <label className="block text-xl font-semibold text-slate-700 mb-3">
-          सप्ताह में कितने दिन आराम करते हैं? {data.restDaysPerWeek} दिन
+          {lang === 'hi' ? 'सप्ताह में कितने दिन आराम करते हैं?' : 'Rest Days Per Week'} {data.restDaysPerWeek} दिन
         </label>
         <input
           type="range"
@@ -829,7 +829,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
 
       {/* Stress Level */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">तनाव का स्तर</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'तनाव का स्तर' : 'Stress Level'}</label>
         <div className="grid grid-cols-3 gap-3">
           {[
             { id: 'low', label: '😌 कम' },
@@ -879,7 +879,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
 
       {/* Social Engagement */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">सामाजिक गतिविधि</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'सामाजिक गतिविधि' : 'Social Engagement'}</label>
         <select
           value={data.socialEngagement}
           onChange={e => updateData({ socialEngagement: e.target.value })}
@@ -894,7 +894,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
 
       {/* Alcohol */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">शराब का सेवन</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'शराब का सेवन' : 'Alcohol Consumption'}</label>
         <select
           value={data.alcoholConsumption}
           onChange={e => updateData({ alcoholConsumption: e.target.value })}
@@ -909,7 +909,7 @@ function Step4SleepLifestyle({ data, updateData, lang }: any) {
 
       {/* Tobacco */}
       <div>
-        <label className="block text-xl font-semibold text-slate-700 mb-3">तंबाकू का सेवन</label>
+        <label className="block text-xl font-semibold text-slate-700 mb-3">{lang === 'hi' ? 'तंबाकू का सेवन' : 'Tobacco Use'}</label>
         <select
           value={data.tobaccoUse}
           onChange={e => updateData({ tobaccoUse: e.target.value })}
